@@ -14,6 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set version from tag
+        if: github.event_name == 'release'
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}  # removes 'v' prefix from tag
+          /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" Resources/Info.plist
+          /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $VERSION" Resources/Info.plist
+
       - name: Build app
         run: ./build.sh
 
