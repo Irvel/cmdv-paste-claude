@@ -25,13 +25,18 @@ jobs:
         run: ./build.sh
 
       - name: Zip app bundle
-        run: zip -r CmdVPasteClaude.zip CmdVPasteClaude.app
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            zip -r "CmdVPasteClaude-${GITHUB_REF_NAME}.zip" CmdVPasteClaude.app
+          else
+            zip -r CmdVPasteClaude.zip CmdVPasteClaude.app
+          fi
 
       - name: Upload to Release
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v1
         with:
-          files: CmdVPasteClaude.zip
+          files: CmdVPasteClaude-${{ github.ref_name }}.zip
 
       - name: Upload artifact (for manual runs)
         if: github.event_name == 'workflow_dispatch'
