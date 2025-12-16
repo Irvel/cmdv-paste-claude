@@ -1,3 +1,7 @@
-/.DS_Store
-/.build
-/.claude
+# Build artifacts
+.build/
+CmdVPasteClaude.app/
+CmdVPasteClaude.zip
+
+# macOS
+.DS_Store
