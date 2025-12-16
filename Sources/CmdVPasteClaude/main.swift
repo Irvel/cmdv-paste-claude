@@ -49,11 +49,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    private func loadMenuBarIcon() -> NSImage? {
+        let bundle = Bundle.main
+        if let iconURL = bundle.url(forResource: "menubar_icon", withExtension: "png"),
+           let image = NSImage(contentsOf: iconURL) {
+            image.isTemplate = true
+            image.size = NSSize(width: 18, height: 18)
+            return image
+        }
+        // Fallback to system symbol
+        return NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "CmdV Paste Claude")
+    }
+
     private func setupMenuBar() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "CmdV Paste Claude")
+            button.image = loadMenuBarIcon()
             button.toolTip = "CmdV Paste Claude - Converts clipboard images to files"
         }
 
@@ -110,7 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Update icon to normal state
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "doc.on.clipboard", accessibilityDescription: "CmdV Paste Claude")
+            button.image = loadMenuBarIcon()
         }
 
         // Remove old items and rebuild

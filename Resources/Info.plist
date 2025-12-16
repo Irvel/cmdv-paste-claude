@@ -5,7 +5,7 @@
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
     <key>CFBundleIdentifier</key>
-    <string>com.irvel.CmdVPasteClaude</string>
+    <string>com.bynight.CmdVPasteClaude</string>
     <key>CFBundleName</key>
     <string>CmdV Paste Claude</string>
     <key>CFBundleDisplayName</key>

@@ -17,11 +17,11 @@ mkdir -p "$APP_BUNDLE/Contents/Resources"
 # Copy executable
 cp ".build/release/$APP_NAME" "$APP_BUNDLE/Contents/MacOS/"
 
-# Copy Info.plist
-cp "Sources/CmdVPasteClaude/Info.plist" "$APP_BUNDLE/Contents/"
-
-# Copy icon
+# Copy resources
+cp "Resources/Info.plist" "$APP_BUNDLE/Contents/"
 cp "AppIcon.icns" "$APP_BUNDLE/Contents/Resources/"
+cp "Resources/menubar_icon.png" "$APP_BUNDLE/Contents/Resources/"
+cp "Resources/menubar_icon@2x.png" "$APP_BUNDLE/Contents/Resources/"
 
 echo "Build complete: $APP_BUNDLE"
 echo ""
