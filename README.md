@@ -1,12 +1,12 @@
 # CmdV Paste Claude
 
-This is a workaround to bypass Claude Code's pasting images with Ctrl+V.
+This is a macOs workaround to bypass Claude Code's pasting images with Ctrl+V.
 
-I want to paste everything, including images, with Cmd+V. 
+I want to paste everything, including images, with Cmd+V, everywhere.
 
-The workaround works by having a macOS menu bar app that converts every __"image"__ in the clipboard into a __"file"__, which can be pasted freely with Cmd+V.
+This works by having a menu bar app that converts every ***image*** in the clipboard into a ***file***. CC accepts pasting files with Cmd+V.
 
-I created this workaround because I'm used to pasting with Cmd+V in every other app. I don't want to use a different shortcut for Claude Code.
+I'm used to pasting with Cmd+V in every other app and I don't want to use a different shortcut for Claude Code: I want to paste the image, I don't want to _think_ about how to paste it.
 
 # History
 
@@ -21,10 +21,10 @@ The reasoning I've found is "due to some restrictions from the terminal".
 
 ## How it works
 
-When you copy an image (Cmd+C) or take a screenshot (Cmd+Shift+3/4/5), this app automatically:
+When you copy an image (Cmd+C), this app automatically:
 
-1. Detects the image in your clipboard
-2. Saves it as a PNG file in a temp directory
+1. Detects the image in your clipboard (checks if the clipboard contains an image)
+2. Saves it as a PNG file in a temp directory (temp images are cleaned on app startup)
 3. Replaces the clipboard contents with a file reference
 
 ## Requirements
