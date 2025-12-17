@@ -23,6 +23,14 @@ cp "AppIcon.icns" "$APP_BUNDLE/Contents/Resources/"
 cp "Resources/menubar_icon.png" "$APP_BUNDLE/Contents/Resources/"
 cp "Resources/menubar_icon@2x.png" "$APP_BUNDLE/Contents/Resources/"
 
+# Sign the app bundle (if certificate is available)
+if security find-identity -v -p codesigning | grep -q "bynight"; then
+    codesign --deep --force --sign "bynight" "$APP_BUNDLE"
+    echo "Signed with 'bynight' certificate"
+else
+    echo "Note: 'bynight' certificate not found, skipping signing"
+fi
+
 echo "Build complete: $APP_BUNDLE"
 echo ""
 echo "To install, drag $APP_BUNDLE to /Applications"
