@@ -8,6 +8,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var eventMonitor: Any?
     private var lastChangeCount: Int = 0
     private var permissionCheckTimer: Timer?
+    private var clipboardPollTimer: Timer?
 
     override init() {
         // Create temp directory for images
@@ -215,6 +216,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if eventMonitor == nil {
             print("Warning: Could not start event monitor.")
         }
+
+        // Poll clipboard for changes (catches UI-triggered copies that don't use keyboard)
+        clipboardPollTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+            self?.checkClipboard()
+        }
     }
 
     private var pendingCheck: DispatchWorkItem?
@@ -345,6 +351,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func quit() {
         permissionCheckTimer?.invalidate()
+        clipboardPollTimer?.invalidate()
         if let monitor = eventMonitor {
             NSEvent.removeMonitor(monitor)
         }
